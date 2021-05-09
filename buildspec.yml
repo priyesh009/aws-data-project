@@ -1,6 +1,6 @@
 version: 0.1
 phases: 
-  install :
+  install:
     commands:
       - aws cloudformation package --template-file samTemplate.yaml --s3-bucket aws-data-common --output-template-file outputSamTemplate.yaml
 artifacts:
