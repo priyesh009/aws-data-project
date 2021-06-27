@@ -1,0 +1,12 @@
+{
+  "archive_dir" : "/home/ubuntu/airflow/archived/",
+  "merge_dir" : "/home/ubuntu/airflow/processed/final_data/",
+  "source" : [{
+      "json_source_dir" : "/home/ubuntu/airflow/datasources/src1/",
+      "csv_source_dir" : "/home/ubuntu/airflow/datasources/src2/"
+  }],
+  "processed" : [{
+      "json_processed_dir" : "/home/ubuntu/airflow/processed/json_data/",
+      "csv_processed_dir" : "/home/ubuntu/airflow/processed/csv_data/"
+  }]
+}

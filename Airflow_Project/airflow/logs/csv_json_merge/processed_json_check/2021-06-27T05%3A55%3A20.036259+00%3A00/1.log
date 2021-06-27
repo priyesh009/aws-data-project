@@ -1,0 +1,19 @@
+[2021-06-27 05:56:32,917] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: csv_json_merge.processed_json_check 2021-06-27T05:55:20.036259+00:00 [queued]>
+[2021-06-27 05:56:32,924] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: csv_json_merge.processed_json_check 2021-06-27T05:55:20.036259+00:00 [queued]>
+[2021-06-27 05:56:32,924] {taskinstance.py:866} INFO - 
+--------------------------------------------------------------------------------
+[2021-06-27 05:56:32,924] {taskinstance.py:867} INFO - Starting attempt 1 of 2
+[2021-06-27 05:56:32,924] {taskinstance.py:868} INFO - 
+--------------------------------------------------------------------------------
+[2021-06-27 05:56:32,934] {taskinstance.py:887} INFO - Executing <Task(BashOperator): processed_json_check> on 2021-06-27T05:55:20.036259+00:00
+[2021-06-27 05:56:32,937] {standard_task_runner.py:53} INFO - Started process 4751 to run task
+[2021-06-27 05:56:32,985] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: csv_json_merge.processed_json_check 2021-06-27T05:55:20.036259+00:00 [running]> ip-172-31-21-147.ec2.internal
+[2021-06-27 05:56:32,997] {bash_operator.py:82} INFO - Tmp dir root location: 
+ /tmp
+[2021-06-27 05:56:32,999] {bash_operator.py:105} INFO - Temporary script location: /tmp/airflowtmpniwML6/processed_json_checkXsetcN
+[2021-06-27 05:56:32,999] {bash_operator.py:115} INFO - Running command: shasum ~/airflow/processed/json_data/json*
+[2021-06-27 05:56:33,005] {bash_operator.py:122} INFO - Output:
+[2021-06-27 05:56:33,026] {bash_operator.py:126} INFO - eb6ab02a5b90aef955b99927403131225abe8f88  /home/ubuntu/airflow/processed/json_data/json_processed_2021-05-16.csv
+[2021-06-27 05:56:33,027] {bash_operator.py:130} INFO - Command exited with return code 0
+[2021-06-27 05:56:33,034] {taskinstance.py:1048} INFO - Marking task as SUCCESS.dag_id=csv_json_merge, task_id=processed_json_check, execution_date=20210627T055520, start_date=20210627T055632, end_date=20210627T055633
+[2021-06-27 05:56:42,914] {logging_mixin.py:112} INFO - [2021-06-27 05:56:42,914] {local_task_job.py:103} INFO - Task exited with return code 0

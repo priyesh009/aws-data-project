@@ -1,0 +1,41 @@
+[2021-05-16 05:36:08,704] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: json_data_ingesation.process_json 2021-05-16T05:34:26.656855+00:00 [queued]>
+[2021-05-16 05:36:08,714] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: json_data_ingesation.process_json 2021-05-16T05:34:26.656855+00:00 [queued]>
+[2021-05-16 05:36:08,715] {taskinstance.py:866} INFO - 
+--------------------------------------------------------------------------------
+[2021-05-16 05:36:08,715] {taskinstance.py:867} INFO - Starting attempt 1 of 2
+[2021-05-16 05:36:08,715] {taskinstance.py:868} INFO - 
+--------------------------------------------------------------------------------
+[2021-05-16 05:36:08,724] {taskinstance.py:887} INFO - Executing <Task(PythonOperator): process_json> on 2021-05-16T05:34:26.656855+00:00
+[2021-05-16 05:36:08,727] {standard_task_runner.py:53} INFO - Started process 2525 to run task
+[2021-05-16 05:36:08,777] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: json_data_ingesation.process_json 2021-05-16T05:34:26.656855+00:00 [running]> ip-172-31-21-147.ec2.internal
+[2021-05-16 05:36:08,840] {logging_mixin.py:112} WARNING - /home/ubuntu/airflow/dags/process_utils.py:23: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
+of pandas will change to not sort by default.
+
+To accept the future behavior, pass 'sort=False'.
+
+To retain the current behavior and silence the warning, pass 'sort=True'.
+
+  df_file=pd.concat(df_file_level)
+[2021-05-16 05:36:08,847] {taskinstance.py:1128} ERROR - Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
+pyarrow or fastparquet is required for parquet support
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/models/taskinstance.py", line 966, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/operators/python_operator.py", line 113, in execute
+    return_value = self.execute_callable()
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/operators/python_operator.py", line 118, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/home/ubuntu/airflow/dags/process_utils.py", line 25, in process_json
+    archive_data_parquet(df_file, arc_dir, file)
+  File "/home/ubuntu/airflow/dags/process_utils.py", line 65, in archive_data_parquet
+    dataframe.to_parquet(archive_dir + filename.split('.')[0] + '.parquet', index=False)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/pandas/core/frame.py", line 2203, in to_parquet
+    partition_cols=partition_cols, **kwargs)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/pandas/io/parquet.py", line 250, in to_parquet
+    impl = get_engine(engine)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/pandas/io/parquet.py", line 32, in get_engine
+    raise ImportError("Unable to find a usable engine; "
+ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
+pyarrow or fastparquet is required for parquet support
+[2021-05-16 05:36:08,853] {taskinstance.py:1151} INFO - Marking task as UP_FOR_RETRY
+[2021-05-16 05:36:18,699] {logging_mixin.py:112} INFO - [2021-05-16 05:36:18,699] {local_task_job.py:103} INFO - Task exited with return code 1

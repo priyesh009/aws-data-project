@@ -1,0 +1,21 @@
+[2021-05-16 05:11:07,370] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: json_data_ingesation.process_json 2021-05-15T00:00:00+00:00 [queued]>
+[2021-05-16 05:11:07,380] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: json_data_ingesation.process_json 2021-05-15T00:00:00+00:00 [queued]>
+[2021-05-16 05:11:07,380] {taskinstance.py:866} INFO - 
+--------------------------------------------------------------------------------
+[2021-05-16 05:11:07,380] {taskinstance.py:867} INFO - Starting attempt 1 of 2
+[2021-05-16 05:11:07,380] {taskinstance.py:868} INFO - 
+--------------------------------------------------------------------------------
+[2021-05-16 05:11:07,390] {taskinstance.py:887} INFO - Executing <Task(PythonOperator): process_json> on 2021-05-15T00:00:00+00:00
+[2021-05-16 05:11:07,392] {standard_task_runner.py:53} INFO - Started process 9670 to run task
+[2021-05-16 05:11:07,439] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: json_data_ingesation.process_json 2021-05-15T00:00:00+00:00 [running]> ip-172-31-21-147.ec2.internal
+[2021-05-16 05:11:07,450] {taskinstance.py:1128} ERROR - process_json() takes at least 2 arguments (0 given)
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/models/taskinstance.py", line 966, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/operators/python_operator.py", line 113, in execute
+    return_value = self.execute_callable()
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/operators/python_operator.py", line 118, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+TypeError: process_json() takes at least 2 arguments (0 given)
+[2021-05-16 05:11:07,454] {taskinstance.py:1151} INFO - Marking task as UP_FOR_RETRY
+[2021-05-16 05:11:17,346] {logging_mixin.py:112} INFO - [2021-05-16 05:11:17,346] {local_task_job.py:103} INFO - Task exited with return code 1

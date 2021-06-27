@@ -1,0 +1,25 @@
+[2021-06-27 05:58:06,126] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: csv_json_merge.merge_csv_json 2021-06-26T00:00:00+00:00 [queued]>
+[2021-06-27 05:58:06,136] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: csv_json_merge.merge_csv_json 2021-06-26T00:00:00+00:00 [queued]>
+[2021-06-27 05:58:06,136] {taskinstance.py:866} INFO - 
+--------------------------------------------------------------------------------
+[2021-06-27 05:58:06,136] {taskinstance.py:867} INFO - Starting attempt 2 of 2
+[2021-06-27 05:58:06,136] {taskinstance.py:868} INFO - 
+--------------------------------------------------------------------------------
+[2021-06-27 05:58:06,145] {taskinstance.py:887} INFO - Executing <Task(PythonOperator): merge_csv_json> on 2021-06-26T00:00:00+00:00
+[2021-06-27 05:58:06,148] {standard_task_runner.py:53} INFO - Started process 4820 to run task
+[2021-06-27 05:58:06,199] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: csv_json_merge.merge_csv_json 2021-06-26T00:00:00+00:00 [running]> ip-172-31-21-147.ec2.internal
+[2021-06-27 05:58:06,230] {taskinstance.py:1128} ERROR - unsupported operand type(s) for +: 'NoneType' and 'str'
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/models/taskinstance.py", line 966, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/operators/python_operator.py", line 113, in execute
+    return_value = self.execute_callable()
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/airflow/operators/python_operator.py", line 118, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/home/ubuntu/airflow/dags/process_utils.py", line 78, in merge_csv_json_data
+    write_data_csv(final,merge_dir,'merged_' + '{}.csv'.format(datetime.now().date()))
+  File "/home/ubuntu/airflow/dags/process_utils.py", line 70, in write_data_csv
+    dataframe.to_csv(write_dir + filename.split('.')[0] + '.csv', encoding='utf-8', index=False)
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+[2021-06-27 05:58:06,231] {taskinstance.py:1170} INFO - All retries failed; marking task as FAILED.dag_id=csv_json_merge, task_id=merge_csv_json, execution_date=20210626T000000, start_date=20210627T055806, end_date=20210627T055806
+[2021-06-27 05:58:16,121] {logging_mixin.py:112} INFO - [2021-06-27 05:58:16,121] {local_task_job.py:103} INFO - Task exited with return code 1

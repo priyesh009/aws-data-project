@@ -1,0 +1,13 @@
+[2021-06-27 06:16:11,926] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: csv_json_merge.csv_processed_src_cleanup 2021-06-27T06:13:24.265756+00:00 [queued]>
+[2021-06-27 06:16:11,936] {taskinstance.py:655} INFO - Dependencies all met for <TaskInstance: csv_json_merge.csv_processed_src_cleanup 2021-06-27T06:13:24.265756+00:00 [queued]>
+[2021-06-27 06:16:11,936] {taskinstance.py:866} INFO - 
+--------------------------------------------------------------------------------
+[2021-06-27 06:16:11,936] {taskinstance.py:867} INFO - Starting attempt 1 of 2
+[2021-06-27 06:16:11,936] {taskinstance.py:868} INFO - 
+--------------------------------------------------------------------------------
+[2021-06-27 06:16:11,945] {taskinstance.py:887} INFO - Executing <Task(PythonOperator): csv_processed_src_cleanup> on 2021-06-27T06:13:24.265756+00:00
+[2021-06-27 06:16:11,948] {standard_task_runner.py:53} INFO - Started process 7387 to run task
+[2021-06-27 06:16:11,998] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: csv_json_merge.csv_processed_src_cleanup 2021-06-27T06:13:24.265756+00:00 [running]> ip-172-31-21-147.ec2.internal
+[2021-06-27 06:16:12,011] {python_operator.py:114} INFO - Done. Returned value was: None
+[2021-06-27 06:16:12,015] {taskinstance.py:1048} INFO - Marking task as SUCCESS.dag_id=csv_json_merge, task_id=csv_processed_src_cleanup, execution_date=20210627T061324, start_date=20210627T061611, end_date=20210627T061612
+[2021-06-27 06:16:21,895] {logging_mixin.py:112} INFO - [2021-06-27 06:16:21,894] {local_task_job.py:103} INFO - Task exited with return code 0
