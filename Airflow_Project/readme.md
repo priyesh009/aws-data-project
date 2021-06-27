@@ -13,7 +13,7 @@ The DAG should write to a CSV file the following: date, post id, shares, comment
 
 Although the sample files are small, your program should be designed such that it could be used in the future to merge large files.
 
-![Architecture Diagram](https://github.com/[priyesh009]/[aws-data-project]/blob/[master]/Airflow_Project/docs/arch.png?raw=true)
+![Architecture Diagram](https://github.com/priyesh009/aws-data-project/blob/master/Airflow_Project/docs/arch.png?raw=true)
 
 ## Some important project files locations
 Inside airflow directory.
