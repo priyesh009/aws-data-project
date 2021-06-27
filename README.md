@@ -8,5 +8,6 @@ As of now, I have created below projects
 This repo is configured with the aws codepipeline in my personal AWS account.
 Inside lambda folder you can find some senarion where I have used AWS lambda and python coding to solve some intresting problems
 
-## Resources
-- CICD tutorial: https://www.youtube.com/watch?v=aGI4Wlm5c9U
+## Upcoming projects
+- covid-19 reporting in AWS
+- Using recursive aws lambda to extract data 
