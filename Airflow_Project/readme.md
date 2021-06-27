@@ -47,7 +47,7 @@ In this project I have used python, pandas and airflow.
 - Then I created multiple folders under **airflow/processed/** to store source and processed files. 
 - At the end dag was successfully executed and the final result is stored in **airflow/processed/final_data/final_{Date on which file was processed}.csv**
 
-## Improment areas/thoughts
+## Pending Enhancements
 
 In future I am planning to implement following things to improve the code and try to make it production-ready and scalable.
 
