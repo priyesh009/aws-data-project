@@ -3,11 +3,10 @@ phases:
   install:
     commands:
       - aws cloudformation package --template-file samTemplate.yaml --s3-bucket aws-data-common --output-template-file outputSamTemplate.yaml
-      - aws cloudformation package --template-file glueTemplate.yaml --s3-bucket aws-data-common --output-template-file outputGlueTemplate.yaml
+      - aws s3 cp glueTemplate.yaml s3://aws-data-common/templates
+
 artifacts:
   type: zip
   files:
     - samTemplate.yaml
     - outputSamTemplate.yaml
-    - glueTemplate.yaml
-    - outputGlueTemplate.yaml

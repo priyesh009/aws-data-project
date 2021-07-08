@@ -12,3 +12,9 @@ Resources:
       MemorySize: 128
       Timeout: 30
       Role: 'arn:aws:iam::337769067848:role/LambdaFullAccess'
+
+  GlueStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: https://aws-data-common.s3.ap-south-1.amazonaws.com/templates/glueTemaplte.yaml
+      TimeoutInMinutes: 60
