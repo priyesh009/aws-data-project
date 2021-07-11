@@ -1,12 +1,12 @@
-#  Airflow Data Engineering Project:
+#  Azure Data Engineering Project:
 In this readme file, I have shared my experience while creating this project, setup instructions, and thoughts.
 
-## Project Detais
+## Project Details
 
 In this projet we have 3 different data sources. CSV, JSON and XML.
-I have processed these data sources with Azure Databrck.
+I have processed these data sources with Azure Databricks.
 then Orchestrated them with the Azure Data Factory.
-And gerentated the reports in DataBrick it self.
+And gerentated the reports in DataBricks.
 
 ## Architecture Diagram
 ![Architecture Diagram](https://github.com/priyesh009/aws-data-project/blob/master/Azure_Databricks_Project/docs/DatabricksProject.jpg?raw=true)
