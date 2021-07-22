@@ -5,7 +5,7 @@ Resources:
     Type: AWS::Glue::Job
     Properties: 
       Command: 
-          Name: simpleglues3
+          Name: glueetl
           PythonVersion: 3
           ScriptLocation: s3://aws-data-common/gluescripts/simpleglues3.py
       Description: s3 to s3 glue job
