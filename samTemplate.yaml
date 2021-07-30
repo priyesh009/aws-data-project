@@ -1,6 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Testing CICD Lmabda
+
+Parameters:
+  LambdaFullAccessRole:
+    Type: String
+    Description: Lambda Full access Role
+    Default: arn:aws:iam::337769067848:role/LambdaFullAccess
+
 Resources:
   CDDemoLambda:
     Type: 'AWS::Serverless::Function'
@@ -13,8 +20,25 @@ Resources:
       Timeout: 30
       Role: 'arn:aws:iam::337769067848:role/LambdaFullAccess'
 
+  RecursiveLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.6
+      CodeUri: ./codes/aws_lambda_codes/recursiveLambda
+      Description: 'Recursive lambda for extracting the data'
+      MemorySize: 128
+      Timeout: 30
+      Role: !Ref LambdaFullAccessRole
+
   GlueStack:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       TemplateURL: https://aws-data-common.s3.ap-south-1.amazonaws.com/templates/glueTemplate.yaml
+      TimeoutInMinutes: 60
+
+  SecretsStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: https://aws-data-common.s3.ap-south-1.amazonaws.com/templates/secretsTemplate.yaml
       TimeoutInMinutes: 60
