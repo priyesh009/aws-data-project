@@ -21,6 +21,17 @@ As the Volume of the data was very high in the source DB therefore, the decision
 The Data will only land in S3 if the source tables are not empty. 
 
 ### Technical Details
+
+#### AWS Services 
+- AWS Lambda Function
+- Amazon S3
+- AWS Secrets Manager
+- AWS CloudFormation
+- AWS Event Bridge
+
+####  Python libraries
+- SQLAlchemy
+
 **Recursive Lambda Function**
 A lambda function edb_iris_land_lilly_play_in_s3raw is created in edb via CloudFormation in sam_template.yml.
 - recursive_lambda.py
