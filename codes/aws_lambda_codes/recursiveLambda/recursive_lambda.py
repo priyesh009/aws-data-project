@@ -1,7 +1,8 @@
 "Extract data from Database"
 import os
 import json
-from utilities.utils import process_data, put_data_s3
+from utilities.utils import process_data#, put_data_s3
+from python_lambda_libraries import put_data_s3
 from utilities.processor import Processor
 #from notification library import notifunc
 s3_bucket = os.environ.get('targetS3Bucket')
