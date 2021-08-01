@@ -38,9 +38,9 @@ Resources:
       Timeout: 30
       Environment:
         Variables:
-          targetS3Bucket: lambdadb
-          DBsecret: admin
-          TargetLoc: recursicelambdatgt/
+          targetS3Bucket: !Ref TargetS3Bucket
+          DBsecret: !Ref DBSecretID
+          TargetLoc: recursive_lambdatgt/
       Layers: 
         - !Ref PythonLibrariesLayer
       Role: !Ref LambdaFullAccessRole
