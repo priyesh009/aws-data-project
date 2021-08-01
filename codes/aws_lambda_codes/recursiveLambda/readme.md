@@ -21,7 +21,7 @@ As the Volume of the data was very high in the source DB therefore, the decision
 The Data will only land in S3 if the source tables are not empty. 
 
 ### Technical Details
-
+ 
 #### AWS Services 
 - AWS Lambda Function
 - Amazon S3

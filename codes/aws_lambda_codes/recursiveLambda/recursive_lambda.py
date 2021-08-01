@@ -14,7 +14,7 @@ def lambda_handler(event, context):
   '''
   try:
     print(f'Lambda Context: {context}')
-    with open('config/table_name_list.json') as data:
+    with open('config/table_sql.json') as data:
        jsondata = json.load(data)
       
     processor = Processor(event)
