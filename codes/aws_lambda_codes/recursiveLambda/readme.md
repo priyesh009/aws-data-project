@@ -41,16 +41,16 @@ The Data will only land in S3 if the source tables are not empty.
 - SQL
 - YAML and JSON
 
-**Recursive Lambda Function**
+**Recursive Lambda Function**:
 A lambda function RecursiveLambda is created in my personal AWS account via CI/CD setup configure with this GitHub Repository.     
 
 CloudFormation YAML code for this lambda setup is at this location in Resources section with resource name **RecursiveLambda**: https://github.com/priyesh009/aws-data-project/blob/master/samTemplate.yaml 
 
 - **recursive_lambda.py**
-The recursive_lambda.py acts as our AWS lambda function's handler. This is the driving file of data extraction process landing process and performs the below functions.
+The recursive_lambda.py acts as our AWS lambda function's handler. This is the driving file of data extraction process landing process and performs the below functions. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/recursive_lambda.py
 
 - Imports Utilities: Processor Class from processor.py and python functions from utils.py. 
-- Imports s3_put function from lambda layers. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/LambdaLib/python/lambda_layers.py
+- Imports s3_put function from **lambda layers**. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/LambdaLib/python/lambda_layers.py
 - Loads the table_sql.json from config directory. 
 
 lambda_handler is used to connect to the DB and fetches the data per table by iterating over the table list and its corresponding SQL Query mentioned in the config file. This function passes the event along with parameters like S3 bucket name, S3 Key, DB string, and data processing python function to the process method of Processor Class.
@@ -69,7 +69,7 @@ The utils.py has the python function which helps us to set up the objects in S3.
 - **processor.py**
 Ths utils.py has the Class Processor and its methods which helps us to make the recursive calls and invoke a lambda per table. The functions are explained as follows.
 
-- **init** method is used to initialize the event.
+- **Dunder __init__** method is used to initialize the event.
 process method takes lambda context, tables_names, process_data function,s3_bucket,s3_key,put_s3 function, and DB Connection as input. Then it checks if the event is a scheduled event. If it is a scheduled event then it iterates over the table list defined in the config file and for each table, it will invoke the lambda function again which eventually calls the _make_recursive_call method with parameters containing table name, S3 key, DB connections and SQL query.
 Else it will execute the process_data function and finally calls the S3 put function to load data in target S3 bucket.
 
@@ -80,7 +80,7 @@ So, if there are 30 source tables then there would be 31 invocations. one would 
 
 **generic_retrieve_secret** function is used to retrieve the DB connection details which are manually entered through AWS console or in case we can also attach the secret with the Database if it resides in AWS. However, if the Database resides in the AWS then is possible to configure the secret's manager with RDS and also enable the secrets rotation lambda.
 
-## You also check other project which I have implemented at my free time
+## You may also check my other projects which I have implemented at my free time
 
 Data Engineering Project using Airflow: https://github.com/priyesh009/aws-data-project/tree/master/Airflow_Project
 Data Engineering Project Azure Databricks: https://github.com/priyesh009/aws-data-project/tree/master/Azure_Databricks_Project
