@@ -41,7 +41,8 @@ Resources:
           targetS3Bucket: lambdadb
           DBsecret: admin
           TargetLoc: recursicelambdatgt/
-      Layers: !Ref PythonLibrariesLayer
+      Layers: 
+        - !Ref PythonLibrariesLayer
       Role: !Ref LambdaFullAccessRole
 
   CDDemoLambda:
