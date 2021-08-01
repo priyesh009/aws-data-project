@@ -2,7 +2,6 @@ import time
 import json
 #rom urllib import parse
 
-from botocore.exceptions import ClientError
 import boto3
 
 class Timer: 

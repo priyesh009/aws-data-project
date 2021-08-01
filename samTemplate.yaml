@@ -21,7 +21,7 @@ Resources:
     Type: AWS::Serverless::LayerVersion
     Properties:
       CompatibleRuntimes:
-        - python3.6
+        - python3.8
       ContentUri: ./codes/aws_lambda_codes/LambdaLib
       Description: Reusable library functions and configuration
       LayerName: python_lambda_libraries
