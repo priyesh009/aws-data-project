@@ -76,12 +76,19 @@ Else it will execute the process_data function and finally calls the S3 put func
 So, if there are 30 source tables then there would be 31 invocations. one would be to iterate over the table list and the other 30 to process individual tables.
 
 - **_make_recursive_call** method takes the lambda context and lambda event as input and invokes the lambda function with the help of boto3 SDK.
-**secrets_manager.py**: The secrets_manager.py has the python function which helps us to get the objects from the secrets manager. The functions are explained as follows.
+- **secrets_manager.py**: The secrets_manager.py has the python function which helps us to get the objects from the secrets manager. The functions are explained as follows.
 
 **generic_retrieve_secret** function is used to retrieve the DB connection details which are manually entered through AWS console or in case we can also attach the secret with the Database if it resides in AWS. However, if the Database resides in the AWS then is possible to configure the secret's manager with RDS and also enable the secrets rotation lambda.
 
+### Pending Enhancements
+
+In future I am planning to implement following things to improve the code.
+
+- enable logging module
+- enable unittest cases
+
 ## You may also check my other projects which I have implemented at my free time
 
-Data Engineering Project using Airflow: https://github.com/priyesh009/aws-data-project/tree/master/Airflow_Project
-Data Engineering Project Azure Databricks: https://github.com/priyesh009/aws-data-project/tree/master/Azure_Databricks_Project
-Data Engineering Project using Kinesis Data Stream and Firehose: TBA 
+Data Engineering Project using **Airflow**: https://github.com/priyesh009/aws-data-project/tree/master/Airflow_Project
+Data Engineering Project **Azure Databricks**: https://github.com/priyesh009/aws-data-project/tree/master/Azure_Databricks_Project
+Data Engineering Project using **Kinesis Data Stream and Firehose**: TBA 
