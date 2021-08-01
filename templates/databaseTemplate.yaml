@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  LambdaFullAccessRole:
+    Type: String
+    Description: Lambda Full access Role
+    Default: arn:aws:iam::337769067848:role/LambdaFullAccess
+  TargetS3Bucket:
+    Type: String
+    Description: Target S3 Bucket
+    Default: aws-data-common
+  DBSecretID:
+    Type: String
+    Description: DB secret ID
+    Default: db-secrets-recursive-lambda
+
+Resources:
+  PostgresDB:
+    Type: AWS::RDS::DBInstance
+    Properties: 
+      AllocatedStorage: String
+      AllowMajorVersionUpgrade: Boolean
+      AssociatedRoles: 
+        - DBInstanceRole
+      AutoMinorVersionUpgrade: Boolean
+      AvailabilityZone: String
+      BackupRetentionPeriod: Integer
+      CACertificateIdentifier: String
+      CharacterSetName: String
+      CopyTagsToSnapshot: Boolean
+      DBClusterIdentifier: String
+      DBInstanceClass: String
+      DBInstanceIdentifier: String
+      DBName: String
+      DBParameterGroupName: String
+      DBSecurityGroups: 
+        - String
+      DBSnapshotIdentifier: String
+      DBSubnetGroupName: String
+      DeleteAutomatedBackups: Boolean
+      DeletionProtection: Boolean
+      Domain: String
+      DomainIAMRoleName: String
+      EnableCloudwatchLogsExports: 
+        - String
+      EnableIAMDatabaseAuthentication: Boolean
+      EnablePerformanceInsights: Boolean
+      Engine: String
+      EngineVersion: String
+      Iops: Integer
+      KmsKeyId: String
+      LicenseModel: String
+      MasterUsername: String
+      MasterUserPassword: String
+      MaxAllocatedStorage: Integer
+      MonitoringInterval: Integer
+      MonitoringRoleArn: String
+      MultiAZ: Boolean
+      OptionGroupName: String
+      PerformanceInsightsKMSKeyId: String
+      PerformanceInsightsRetentionPeriod: Integer
+      Port: String
+      PreferredBackupWindow: String
+      PreferredMaintenanceWindow: String
+      ProcessorFeatures: 
+        - ProcessorFeature
+      PromotionTier: Integer
+      PubliclyAccessible: Boolean
+      SourceDBInstanceIdentifier: String
+      SourceRegion: String
+      StorageEncrypted: Boolean
+      StorageType: String
+      Tags: 
+        - Tag
+      Timezone: String
+      UseDefaultProcessorFeatures: Boolean
+      VPCSecurityGroups: 
+        - String

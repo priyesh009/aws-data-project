@@ -8,10 +8,9 @@ As of now, I have created below projects
 - **Azure Data engineering project** - Location:  Azure_Databricks_Project
 
 Inside codes folder you can find some senarion where I have used AWS lambda and python coding to solve some intresting problems
-
+- Data On-boarding using Recursive Lambda: https://github.com/priyesh009/aws-data-project/tree/master/codes/aws_lambda_codes/recursiveLambda 
 ## Upcoming projects
 - covid-19 reporting in AWS
-- Using recursive aws lambda to extract data 
 
 ### Note
 This repo is configured with the aws codepipeline in my personal AWS account.

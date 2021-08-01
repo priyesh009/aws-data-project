@@ -13,15 +13,15 @@ Parameters:
     Type: String
     Description: DB secret ID
     Default: db-secrets-recursive-lambda
-
+ 
 Resources:
-  GlueJobS3:
-    Type: AWS::Glue::Job
+  DataStream:
+    Type: AWS::Kinesis::Stream
     Properties: 
-      Command: 
-          Name: glueetl
-          PythonVersion: 3
-          ScriptLocation: s3://aws-data-common/gluescripts/simpleglues3.py
-      Description: s3 to s3 glue job
-      GlueVersion: 2.0
-      Role: arn:aws:iam::337769067848:role/glue_s3fullaccess
+      Name: String
+      RetentionPeriodHours: Integer
+      ShardCount: Integer
+      StreamEncryption: 
+        StreamEncryption
+      Tags: 
+        - Tag
