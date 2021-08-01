@@ -1,9 +1,9 @@
 {
 "Tables":[{
     "table_name": "employee",
-    "sql_query": "select emp_id, name, address from table_abc ;"
+    "sql_query": "select * from employee ;"
 }, {
-    "table_name": "table_def",
-    "sql_query": "select barnch_id, branch_name from branch ;"
+    "table_name": "branch",
+    "sql_query": "select * from branch ;"
 }]
 }
