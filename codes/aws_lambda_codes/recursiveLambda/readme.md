@@ -9,12 +9,12 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 ## How did it make a difference to the business or the organization
 - This process helped our team to save cost as the data processing is Serverless 
 - It introduced a new way of on-boarding data which helped us to redesign few other existing data on-boarding processes and save money.
-- Previously we were planning to use ECS to on-board the data which would have added complexity, more management and cost. By going with this approcah we save cost, time and resource. With this we were able complete more tasks than planned.
+- Previously we were planning to use ECS to on-board the data which would have added complexity, more management and cost. By going with this approcah we save cost, time and resource. With this I was able to complete more tasks than planned.
 
 ## Technical Design
 
 
-### Architecture and Flow
+### Architecture and Data Flow
 ![Architecture Diagram](https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/docs/rec_lambda.png?raw=true)
 ### Considerations
 The following points were considered before on-boarding the data:
@@ -50,7 +50,7 @@ CloudFormation YAML code for this lambda setup is at this location in Resources 
 The recursive_lambda.py acts as our AWS lambda function's handler. This is the driving file of data extraction process landing process and performs the below functions. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/recursive_lambda.py
 
 - Imports Utilities: Processor Class from processor.py and python functions from utils.py. 
-- Imports s3_put function from **lambda layers**. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/LambdaLib/python/lambda_layers.py
+- Imports s3_put function from **lambda layers**. In Lambda Layers I am alos making use of Timer Class to keep a track of method execution time. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/LambdaLib/python/lambda_layers.py
 - Loads the table_sql.json from config directory. 
 
 lambda_handler is used to connect to the DB and fetches the data per table by iterating over the table list and its corresponding SQL Query mentioned in the config file. This function passes the event along with parameters like S3 bucket name, S3 Key, DB string, and data processing python function to the process method of Processor Class.
@@ -89,6 +89,6 @@ In future I am planning to implement following things to improve the code.
 
 ## You may also check my other projects which I have implemented at my free time
 
-Data Engineering Project using **Airflow**: https://github.com/priyesh009/aws-data-project/tree/master/Airflow_Project
-Data Engineering Project **Azure Databricks**: https://github.com/priyesh009/aws-data-project/tree/master/Azure_Databricks_Project
-Data Engineering Project using **Kinesis Data Stream and Firehose**: TBA 
+- **Data Engineering Project using Airflow**: https://github.com/priyesh009/aws-data-project/tree/master/Airflow_Project
+- **Data Engineering Project using Azure Databricks**: https://github.com/priyesh009/aws-data-project/tree/master/Azure_Databricks_Project
+- **Data Engineering Project using Kinesis Data Stream and Firehose**: TBA 
