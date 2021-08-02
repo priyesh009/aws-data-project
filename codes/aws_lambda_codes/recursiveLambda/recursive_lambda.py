@@ -17,6 +17,9 @@ def lambda_handler(event, context):
     print(f'Lambda Context: {context}')
     with open('config/table_sql.json') as data:
        jsondata = json.load(data)
+
+    if context == "test":
+      return bool(jsondata)
       
     processor = Processor(event)
     return processor.process(context, jsondata.get('Tables'), process_data,s3_bucket,target_file_location,put_data_s3,secret)

@@ -46,7 +46,7 @@ A lambda function RecursiveLambda is created in my personal AWS account via CI/C
 
 CloudFormation YAML code for this lambda setup is at this location in Resources section with resource name **RecursiveLambda**: https://github.com/priyesh009/aws-data-project/blob/master/samTemplate.yaml 
 
-- **recursive_lambda.py**
+#### **recursive_lambda.py**
 The recursive_lambda.py acts as our AWS lambda function's handler. This is the driving file of data extraction process landing process and performs the below functions. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/recursive_lambda.py
 
 - Imports Utilities: Processor Class from processor.py and python functions from utils.py. 
@@ -57,16 +57,16 @@ lambda_handler is used to connect to the DB and fetches the data per table by it
 
 We could also making use of some notification utility to send email or alert in case on failure.
 
-- **table_sql.json**
+#### **config/table_sql.json**
 The config/table_sql.json is the config file. It contains the list of tables and their corresponding SQL query which helps to extract data from the source. Location: https://github.com/priyesh009/aws-data-project/tree/master/codes/aws_lambda_codes/recursiveLambda/config
 
 Each record in this file contains two keys the source table names and the SQL query to extract data from Database.
 
-- **utils.py**
+#### **utils.py**
 The utils.py has the python function which helps us to set up the objects in S3. The functions are explained as follows. Location: https://github.com/priyesh009/aws-data-project/tree/master/codes/aws_lambda_codes/recursiveLambda/utilities
 
-**process_data** function takes DB connection and the SQL query as input and connects to the DB. It gets the header and the rows and stores them in form of a python dictionary in the 'Result' key.
-- **processor.py**
+- **process_data** function takes DB connection and the SQL query as input and connects to the DB. It gets the header and the rows and stores them in form of a python dictionary in the 'Result' key.
+#### **processor.py**
 Ths utils.py has the Class Processor and its methods which helps us to make the recursive calls and invoke a lambda per table. The functions are explained as follows.
 
 - **Dunder __init__** method is used to initialize the event.
@@ -76,16 +76,20 @@ Else it will execute the process_data function and finally calls the S3 put func
 So, if there are 30 source tables then there would be 31 invocations. one would be to iterate over the table list and the other 30 to process individual tables.
 
 - **_make_recursive_call** method takes the lambda context and lambda event as input and invokes the lambda function with the help of boto3 SDK.
-- **secrets_manager.py**: The secrets_manager.py has the python function which helps us to get the objects from the secrets manager. The functions are explained as follows.
+#### **secrets_manager.py**: The secrets_manager.py has the python function which helps us to get the objects from the secrets manager. The functions are explained as follows.
 
-**generic_retrieve_secret** function is used to retrieve the DB connection details which are manually entered through AWS console or in case we can also attach the secret with the Database if it resides in AWS. However, if the Database resides in the AWS then is possible to configure the secret's manager with RDS and also enable the secrets rotation lambda.
+- **generic_retrieve_secret** function is used to retrieve the DB connection details which are manually entered through AWS console or in case we can also attach the secret with the Database if it resides in AWS. However, if the Database resides in the AWS then is possible to configure the secret's manager with RDS and also enable the secrets rotation lambda.
+
+#### test_lambda_handler.py
+Unitest test caese for the lambda_handler function
 
 ### Pending Enhancements
 
 In future I am planning to implement following things to improve the code.
 
 - enable logging module
-- enable unittest cases
+- wirte more unittest cases
+- install python dependencies in the requirements.txt in the code build phase.
 
 ## You may also check my other projects which I have implemented at my free time
 
