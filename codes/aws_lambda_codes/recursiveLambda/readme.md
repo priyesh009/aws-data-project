@@ -24,7 +24,9 @@ The following points were considered before on-boarding the data:
 
 - In case we get terabytes of data per table then I would make sense to pivot to ECS fargate for data on-boarding. 
 
-The Data will only land in S3 if the source tables are not empty. 
+- The Data will only land in S3 if the source tables are not empty. 
+- The Lambda Function can be invoked on a desired frequency with the help of Event Bridge Rules.
+- 
 
 ### Technical Details
  
@@ -81,7 +83,7 @@ So, if there are 30 source tables then there would be 31 invocations. one would 
 - **generic_retrieve_secret** function is used to retrieve the DB connection details which are manually entered through AWS console or in case we can also attach the secret with the Database if it resides in AWS. However, if the Database resides in the AWS then is possible to configure the secret's manager with RDS and also enable the secrets rotation lambda.
 
 #### test_lambda_handler.py
-Unitest test caese for the lambda_handler function
+Unitest test cases for the lambda_handler function
 
 ### Pending Enhancements
 

@@ -16,6 +16,11 @@ Parameters:
     Description: DB secret ID
     Default: db-secrets-recursive-lambda
 
+  RecursiveLambdaScheduleExpression: 
+    Description: schedule expression for Recursive Lambda
+    Type: String
+    Default: rate(1 day) 
+
 Resources:
   PythonLibrariesLayer:
     Type: AWS::Serverless::LayerVersion
@@ -44,6 +49,25 @@ Resources:
       Layers: 
         - !Ref PythonLibrariesLayer
       Role: !Ref LambdaFullAccessRole
+
+  RecursiveLambdaScheduleTrigger:
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: Daily event that triggers recursive lambda function 
+      ScheduleExpression: !Ref RecursiveLambdaScheduleExpression
+      State: ENABLED
+      Targets: 
+        - Arn: !GetAtt RecursiveLambda.Arn
+          Id: RecursiveScheduleEventRule
+
+  RecursiveLambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref RecursiveLambda
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt RecursiveLambdaScheduleTrigger.Arn
+
 
   CDDemoLambda:
     Type: 'AWS::Serverless::Function'
