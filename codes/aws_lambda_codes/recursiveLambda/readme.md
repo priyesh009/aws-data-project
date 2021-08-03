@@ -11,7 +11,7 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 - This process helped our team to save cost as the data processing is Serverless 
 - It introduced a new way of on-boarding data which helped us to redesign few other existing data on-boarding processes and save money.
 - Previously we were planning to use ECS to on-board the data which would have added complexity, more management and cost. By going with this approcah we save cost, time and resource. With this I was able to complete more tasks than planned.
-- Our Multiple teams are also planning to use this process from datasource like DynamoDB, etc. Hence, this process was a great value addition for our company. It, also helped us to reduce the number of resources to manage and take maxium advantage of serverless architecture.
+- Our Multiple teams are also planning to use this process from datasource like DynamoDB, etc. Hence, this process was a great value addition for our company. It also helped us to reduce the number of resources to manage and take maxium advantage of serverless architecture.
 
 ## Technical Design
 
@@ -22,7 +22,7 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 The following points were considered before on-boarding the data:
 
 - As the Volume of the data was not very high in the source DB therefore, the decision to onboard the data with AWS Recursive Lambda was finalized. Hence, this is not recommended for the tables with huge data.
-- As per the test I performed with the Lambda function. I was able to copy more than 5-6 GBs od data before erroring out with 15min timeout. So, basically we can easily copy data from source table even if it is around 5-6 GB. 
+- As per the test I performed with the Lambda function. I was able to copy more than 5-6 GBs od data before erroring out with 15min timeout. So, basically we can easily copy data from source table even upto 5-6 GBs. 
 
 - In case we get terabytes of data per table then I would make sense to pivot to ECS fargate for data on-boarding. 
 
@@ -79,7 +79,8 @@ Else it will execute the process_data function and finally calls the S3 put func
 So, if there are 30 source tables then there would be 31 invocations. one would be to iterate over the table list and the other 30 to process individual tables.
 
 - **_make_recursive_call** method takes the lambda context and lambda event as input and invokes the lambda function with the help of boto3 SDK.
-#### **secrets_manager.py**: The secrets_manager.py has the python function which helps us to get the objects from the secrets manager. The functions are explained as follows.
+#### **secrets_manager.py**: 
+The secrets_manager.py has the python function which helps us to get the objects from the secrets manager. The functions are explained as follows.
 
 - **generic_retrieve_secret** function is used to retrieve the DB connection details which are manually entered through AWS console or in case we can also attach the secret with the Database if it resides in AWS. However, if the Database resides in the AWS then is possible to configure the secret's manager with RDS and also enable the secrets rotation lambda.
 
