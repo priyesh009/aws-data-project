@@ -2,6 +2,7 @@
 
 ## Introduction 
 This document talks about the process to on-board data from any relational database to AWS S3 bucket using lambda function in a recursive fashion.
+**We can also modify this process to fetch data from sources like S3, dynamoDB, APIs, Data warehoues, etc.**
 This is my idea and one of the most innovative things which I developed recently. The Idea was to on-board data in a **serverless fashion** and land it in to Amazon S3 bucket in a **cost effective manner**.
 
 So, in this process I am taking advantage of AWS lambda function's concurrent execution capability and Invoking it recursively for each table which needs to be on-boarded in S3. In simple words if we have 100 source tables then we would invoke this lambda function 100 times parallely to extract the data from the database tables. In this we get 15min for lambda execution time for each source table without creating 100 lambda functions for each table. This is much better that having single lambda invocation trying to extract data from 100 source tables which might lead to lambda execution timeout error.
@@ -10,6 +11,7 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 - This process helped our team to save cost as the data processing is Serverless 
 - It introduced a new way of on-boarding data which helped us to redesign few other existing data on-boarding processes and save money.
 - Previously we were planning to use ECS to on-board the data which would have added complexity, more management and cost. By going with this approcah we save cost, time and resource. With this I was able to complete more tasks than planned.
+- Our Multiple teams are also planning to use this process from datasource like DynamoDB, etc. Hence, this process was a great value addition for our company. It, also helped us to reduce the number of resources to manage and take maxium advantage of serverless architecture.
 
 ## Technical Design
 
@@ -19,14 +21,13 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 ### Considerations
 The following points were considered before on-boarding the data:
 
-- As the Volume of the data was not very high in the source DB therefore, the decision to onboard the data with AWS Recursive Lambda was finalized.
+- As the Volume of the data was not very high in the source DB therefore, the decision to onboard the data with AWS Recursive Lambda was finalized. Hence, this is not recommended for the tables with huge data.
 - As per the test I performed with the Lambda function. I was able to copy more than 5-6 GBs od data before erroring out with 15min timeout. So, basically we can easily copy data from source table even if it is around 5-6 GB. 
 
 - In case we get terabytes of data per table then I would make sense to pivot to ECS fargate for data on-boarding. 
 
 - The Data will only land in S3 if the source tables are not empty. 
 - The Lambda Function can be invoked on a desired frequency with the help of Event Bridge Rules.
-- 
 
 ### Technical Details
  
@@ -84,6 +85,14 @@ So, if there are 30 source tables then there would be 31 invocations. one would 
 
 #### test_lambda_handler.py
 Unitest test cases for the lambda_handler function
+
+### Setup Instructions
+- You need to create the necessary IAM roles with only required permissions and a S3 bucket.
+- To create the resouorce like Lmabda function, secret's mamager and event bridge rules you can refer to the samTemplate.yml at location: https://github.com/priyesh009/aws-data-project/blob/master/samTemplate.yaml 
+You can either deploy the samtemplate.yaml or create them manually through console.
+- For lambda code you may create the zip file from below location and deploy 
+
+**Note:** These are high level instructions. you need to modify the setup up as per your requirments and environment.
 
 ### Pending Enhancements
 
