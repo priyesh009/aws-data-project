@@ -10,8 +10,8 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 ## How did it make a difference to the business or the organization
 - This process helped our team to save cost as the data processing is Serverless 
 - It introduced a new way of on-boarding data which helped us to redesign few other existing data on-boarding processes and save money.
-- Previously we were planning to use ECS to on-board the data which would have added complexity, more management and cost. By going with this approcah we save cost, time and resource. With this I was able to complete more tasks than planned.
-- Our Multiple teams are also planning to use this process from datasource like DynamoDB, etc. Hence, this process was a great value addition for our company. It also helped us to reduce the number of resources to manage and take maxium advantage of serverless architecture.
+- Previously we were planning to use ECS to on-board the data which would have added complexity, more management and cost. By going with this approach we saved cost, time and resource.
+- Multiple teams are also planning to use this process from datasource like DynamoDB, etc. Hence, this process was a great value addition for our company. It also helped us to reduce the number of resources to manage and take maxium advantage of serverless architecture.
 
 ## Technical Design
 
@@ -22,10 +22,9 @@ So, in this process I am taking advantage of AWS lambda function's concurrent ex
 The following points were considered before on-boarding the data:
 
 - As the Volume of the data was not very high in the source DB therefore, the decision to onboard the data with AWS Recursive Lambda was finalized. Hence, this is not recommended for the tables with huge data.
-- As per the test I performed with the Lambda function. I was able to copy more than 5-6 GBs od data before erroring out with 15min timeout. So, basically we can easily copy data from source table even upto 5-6 GBs. 
+- As per the test I performed with the Lambda function. I was able to copy more than 5-6 GBs of data before erroring out with 15min timeout. So, basically we can easily copy data from source table even upto 5-6 GBs. However, this really depends on the type of Database and RAM configuration for lmabda.
 
-- In case we get terabytes of data per table then I would make sense to pivot to ECS fargate for data on-boarding. 
-
+- In case if we have terabytes of data per table then I would make sense to pivot to ECS fargate for data on-boarding. 
 - The Data will only land in S3 if the source tables are not empty. 
 - The Lambda Function can be invoked on a desired frequency with the help of Event Bridge Rules.
 
@@ -53,7 +52,7 @@ CloudFormation YAML code for this lambda setup is at this location in Resources 
 The recursive_lambda.py acts as our AWS lambda function's handler. This is the driving file of data extraction process landing process and performs the below functions. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/recursive_lambda.py
 
 - Imports Utilities: Processor Class from processor.py and python functions from utils.py. 
-- Imports s3_put function from **lambda layers**. In Lambda Layers I am alos making use of Timer Class to keep a track of method execution time. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/LambdaLib/python/lambda_layers.py
+- Imports s3_put function from **lambda layers**. In Lambda Layers I am also making use of Timer Class to keep a track of method execution time. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/LambdaLib/python/lambda_layers.py
 - Loads the table_sql.json from config directory. 
 
 lambda_handler is used to connect to the DB and fetches the data per table by iterating over the table list and its corresponding SQL Query mentioned in the config file. This function passes the event along with parameters like S3 bucket name, S3 Key, DB string, and data processing python function to the process method of Processor Class.
@@ -66,14 +65,16 @@ The config/table_sql.json is the config file. It contains the list of tables and
 Each record in this file contains two keys the source table names and the SQL query to extract data from Database.
 
 #### **utils.py**
-The utils.py has the python function which helps us to set up the objects in S3. The functions are explained as follows. Location: https://github.com/priyesh009/aws-data-project/tree/master/codes/aws_lambda_codes/recursiveLambda/utilities
+The utils.py has the python function which helps us to set up the objects in S3. The functions are explained as follows. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/utilities/utils.py
 
-- **process_data** function takes DB connection and the SQL query as input and connects to the DB. It gets the header and the rows and stores them in form of a python dictionary in the 'Result' key.
+- **process_data** function takes DB connection and the SQL query as input and connects to the DB. It gets the header and the rows and stores them in form of a python dictionary in the 'Result' key. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/utilities/processor.py
+
 #### **processor.py**
-Ths utils.py has the Class Processor and its methods which helps us to make the recursive calls and invoke a lambda per table. The functions are explained as follows.
+Ths processor.py has the Class Processor and its methods which helps us to make the recursive calls and invoke a lambda per table. The functions are explained as follows. Location: https://github.com/priyesh009/aws-data-project/blob/master/codes/aws_lambda_codes/recursiveLambda/utilities/processor.py
 
 - **Dunder __init__** method is used to initialize the event.
-process method takes lambda context, tables_names, process_data function,s3_bucket,s3_key,put_s3 function, and DB Connection as input. Then it checks if the event is a scheduled event. If it is a scheduled event then it iterates over the table list defined in the config file and for each table, it will invoke the lambda function again which eventually calls the _make_recursive_call method with parameters containing table name, S3 key, DB connections and SQL query.
+
+- **process**: Then process method takes lambda context, tables_names, process_data function,s3_bucket,s3_key,put_s3 function, and DB Connection as input. Then it checks if the event is a scheduled event. If it is a scheduled event then it iterates over the table list defined in the config file and for each table, it will invoke the lambda function again which eventually calls the _make_recursive_call method with parameters containing table name, S3 key, DB connections and SQL query.
 Else it will execute the process_data function and finally calls the S3 put function to load data in target S3 bucket.
 
 So, if there are 30 source tables then there would be 31 invocations. one would be to iterate over the table list and the other 30 to process individual tables.
