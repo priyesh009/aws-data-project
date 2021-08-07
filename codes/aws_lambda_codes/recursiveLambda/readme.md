@@ -74,7 +74,7 @@ Ths processor.py has the Class Processor and its methods which helps us to make 
 
 - **Dunder __init__** method is used to initialize the event.
 
-- **process**: Then process method takes lambda context, tables_names, process_data function,s3_bucket,s3_key,put_s3 function, and DB Connection as input. Then it checks if the event is a scheduled event. If it is a scheduled event then it iterates over the table list defined in the config file and for each table, it will invoke the lambda function again which eventually calls the _make_recursive_call method with parameters containing table name, S3 key, DB connections and SQL query.
+- **process**: The process method takes lambda context, tables_names, process_data function,s3_bucket,s3_key,put_s3 function, and DB Connection as input. Then it checks if the event is a scheduled event. If it is a scheduled event then it iterates over the table list defined in the config file and for each table, it will invoke the lambda function again which eventually calls the _make_recursive_call method with parameters containing table name, S3 key, DB connections and SQL query.
 Else it will execute the process_data function and finally calls the S3 put function to load data in target S3 bucket.
 
 So, if there are 30 source tables then there would be 31 invocations. one would be to iterate over the table list and the other 30 to process individual tables.

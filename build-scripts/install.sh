@@ -39,7 +39,16 @@ install_dependencies() {
     cd ${function_directory}
     if [ -f "requirements.txt" ]; then
       echo "  Installing dependencies for ${function_directory}"
-      pip install -r requirements.txt
+      pip install -r requirements.txt -t lib
+      echo "Zipping deployment package"
+      cd lib 
+      zip -r9 ../deployment_package.zip .
+      cd ..
+      zip -g deployment_package.zip lambda_function.py
+      echo "updating lambda function "
+      aws lambda update-function-code --function-name LambdaCDDemoStack-CDDemoLambda-1SZM7XNFHNJZL --zip-file fileb://deployment_package.zip
+      echo "DOne!!"
+
     fi
   done
 }
