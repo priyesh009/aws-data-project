@@ -80,6 +80,24 @@ Resources:
       Timeout: 30
       Role: 'arn:aws:iam::337769067848:role/LambdaFullAccess'
 
+  TestLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: recursive_lambda.lambda_handler
+      Runtime: python3.7
+      CodeUri: ./codes/aws_lambda_codes/testlambda
+      Description: 'Recursive lambda for extracting the data'
+      MemorySize: 128
+      Timeout: 30
+      Environment:
+        Variables:
+          targetS3Bucket: !Ref TargetS3Bucket
+          DBsecret: !Ref DBSecretID
+          TargetLoc: recursive_lambdatgt/
+      Layers: 
+        - !Ref PythonLibrariesLayer
+      Role: !Ref LambdaFullAccessRole
+
   GlueStack:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
