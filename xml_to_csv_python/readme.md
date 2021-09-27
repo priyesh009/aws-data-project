@@ -36,6 +36,8 @@ In this project I have used python, pandas and xmltodict.
 
 - Or I could have build a logic in the existing code to dynamically handle the columns by iterating over the key in XML/Json data.
 
+- I would have done a better job in displaying the information for columns item_source, item_category and item_guid
+
 - I would have also further cleaned the data.
 
 
