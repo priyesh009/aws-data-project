@@ -14,7 +14,8 @@ Challenge Link: https://gist.github.com/Koodoo-Tech/d4bb9e402c266224c13d83f7d0b5
 
 ## Some important project files.
 Inside folder xml_to_csv_python/.
-- **app.py:**  the main driving code 
+- **app.py:**  the main driving code. I have also added comments in the code to explain the steps
+link: https://github.com/priyesh009/aws-data-project/blob/master/xml_to_csv_python/app.py
 - **Output.csv file:** The target file where you can find source data in csv form.
 - **sample.xml:** The source data in XML file.
 
