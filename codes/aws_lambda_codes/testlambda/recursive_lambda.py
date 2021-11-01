@@ -10,7 +10,7 @@ secret=os.environ.get('DBsecret')
 target_file_location=os.environ.get('TargetLoc') 
 
 def lambda_handler(event, context):
-  '''Main Lambda function used to open the config file, connect to heroku postgresql and get the data.
+  '''Main Lambda function used to open the config file, connect to Database and get the data.
     we can also enable service now notification
   '''
   try:
