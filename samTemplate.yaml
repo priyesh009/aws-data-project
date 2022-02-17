@@ -80,6 +80,17 @@ Resources:
       Timeout: 30
       Role: 'arn:aws:iam::337769067848:role/LambdaFullAccess'
 
+  TaskMangerServiceLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      CodeUri: ./codes/aws_lambda_codes/taskmamagerserv
+      Description: 'API taskmanagerserv Lambda'
+      MemorySize: 128
+      Timeout: 300
+      Role: 'arn:aws:iam::337769067848:role/LambdaFullAccess'
+
   TestLambda:
     Type: 'AWS::Serverless::Function'
     Properties:
